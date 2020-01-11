@@ -8,6 +8,14 @@ const express = require('express'),
       mongoose = require('mongoose'),
       PORT = process.env.PORT = 8000;
 
+mongoose.connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+})
+    .then(() => console.log('DB CONNECTED'))
+    .catch(err => console.log(`Error: ${err}`))
 //app middlewares
 app.use(morgan('dev'));
 app.use(bodyParser.json());
