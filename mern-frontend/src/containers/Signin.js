@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {Link, Redirect} from 'react-router-dom';
 import Layout from './Layout';
 import axios from 'axios';
+import {authenticate} from '../helpers/helpers';
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -27,10 +28,11 @@ const Signin = () => {
         })
         .then(res => {
             console.log('signin success');
-
-            //save the response (user, token) localStorage/cookie
-            setValues({...values, email: '', password:'', buttonText: 'Submitted'});
-            toast.success(`Hey ${res.data.user.name}, Welcome back!`);
+            authenticate(res, () => {
+                //save the response (user, token) localStorage/cookie
+                setValues({...values, email: '', password:'', buttonText: 'Submitted'});
+                toast.success(`Hey ${res.data.user.name}, Welcome back!`);
+            })
         })
         .catch(err => {
             console.log('SIGNIN ERROR', err.response.data);
