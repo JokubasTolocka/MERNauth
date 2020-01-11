@@ -29,3 +29,7 @@ exports.signup = (req, res) => {
     })
 };
 
+exports.signup = (req,res) => {
+    
+}
+
