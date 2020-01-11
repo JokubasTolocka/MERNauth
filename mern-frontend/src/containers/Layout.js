@@ -1,12 +1,26 @@
 import React, {Fragment} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
+import {isAuth, signout} from '../helpers/helpers';
 
-const Layout = ({children}) => {
+const Layout = ({children, history}) => {
     const nav = () => (
         <div>
             <Link to='/'>Home</Link>
-            <Link to='/signup'>Signup</Link>
-            <Link to='/signin'>Signin</Link>
+            {!isAuth() && (
+                <Fragment>
+                    <Link to='/signup'>Signup</Link>
+                    <Link to='/signin'>Signin</Link>
+                </Fragment>
+            )}
+            {isAuth() && (
+                <span>{isAuth().name}</span>
+            )}
+            {isAuth() && (
+                <button onClick={() => {
+                    signout(() => {
+                        history.push('/')
+                    })}}>Logout</button>
+            )}
         </div>
     )
     return (
@@ -19,4 +33,4 @@ const Layout = ({children}) => {
     )
 }
 
-export default Layout;
+export default withRouter(Layout);
