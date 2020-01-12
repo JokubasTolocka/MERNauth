@@ -7,7 +7,7 @@ const Google = ({informParent = f => f}) => {
         axios({
             method: 'POST',
             url: `${process.env.REACT_APP_API}/google-login`,
-            data: {idToken: responseGoogle.tokenId}
+            data: {idToken: res.tokenId}
         })
         .then(res => {
             informParent(res);
@@ -22,8 +22,7 @@ const Google = ({informParent = f => f}) => {
             <GoogleLogin 
                 clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
                 render={renderProps => (
-                    <button onClick={renderProps.click}
-                            disabled={renderProps.disabled}
+                    <button onClick={renderProps.onClick}
                     >Login</button>
                 )}
                 onSuccess={responseGoogle}
