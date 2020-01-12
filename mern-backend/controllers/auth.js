@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_APIKEY);
 
@@ -116,6 +117,11 @@ exports.signin = (req,res) => {
         return res.json({
             token,
             user: {_id, name, email, role}
-        })
+        });
     })
 }
+
+exports.requireSignin = expressJwt({
+    secret: process.env.JWT_SECRET
+});
+

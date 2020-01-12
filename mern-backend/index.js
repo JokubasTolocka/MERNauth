@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express'),
       app = express(),
       authRoutes = require('./routes/auth'),
+      userRoutes = require('./routes/user'),
       morgan = require('morgan'),
       cors = require('cors'),
       bodyParser = require('body-parser'),
@@ -26,6 +27,8 @@ if(process.env.NODE_ENV = 'development') {
 }
 
 app.use('/api', authRoutes);
+app.use('/api', userRoutes);
+
 
 //app middlewares
 
