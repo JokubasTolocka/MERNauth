@@ -24,7 +24,7 @@ const Forgot = ({history}) => {
             data: { email}
         })
         .then(res => {
-            toast.success(response.data.message)
+            toast.success(res.data.message)
             setValues({...values, buttonText: 'Requested'})
         })
         .catch(err => {
