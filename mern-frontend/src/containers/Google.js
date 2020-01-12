@@ -2,7 +2,7 @@ import React from 'react'
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 
-const Google = () => {
+const Google = ({informParent = f => f}) => {
     const responseGoogle = (res) => {
         axios({
             method: 'POST',
@@ -10,10 +10,10 @@ const Google = () => {
             data: {idToken: responseGoogle.tokenId}
         })
         .then(res => {
-
+            informParent(res);
         })
         .catch(err => {
-            
+
         })
     }
     

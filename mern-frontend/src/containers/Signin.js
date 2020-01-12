@@ -19,6 +19,13 @@ const Signin = ({history}) => {
         setValues({...values, [name]: event.target.value})
     }
 
+    const informParent = res => {
+        authenticate(res, () => {
+            // toast.success(`Hey ${res.data.user.name}, Welcome back!`);
+            isAuth() && isAuth().role === 'admin' ? history.push('/admin') : history.push('/private')
+        });
+    }
+
     const handleSubmit = e => {
         e.preventDefault();
         setValues({...values, buttonText: 'Submitting...'});
@@ -70,7 +77,7 @@ const Signin = ({history}) => {
     return(
     <Layout>
         <ToastContainer/>
-        <Google/>
+        <Google informParent={informParent}/>
         <h1>Signin</h1>
         {isAuth() ? <Redirect to='/'/> : null}
         {signinForm()}
