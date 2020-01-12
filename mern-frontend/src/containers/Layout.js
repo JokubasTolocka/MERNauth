@@ -12,8 +12,11 @@ const Layout = ({children, history}) => {
                     <Link to='/signin'>Signin</Link>
                 </Fragment>
             )}
-            {isAuth() && (
-                <span>{isAuth().name}</span>
+            {isAuth() && isAuth().role === 'admin' && (
+                <Link to='/admin'>{isAuth().name}</Link>
+            )}
+            {isAuth() && isAuth().role === 'subscriber' && (
+                <Link to='/private'>{isAuth().name}</Link>
             )}
             {isAuth() && (
                 <button onClick={() => {
