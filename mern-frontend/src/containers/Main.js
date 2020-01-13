@@ -1,29 +1,24 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import App from '../App';
-import Signup from './Signup';
-import Signin from './Signin';
 import Activate from './Activate';
 import Private from './Private';
 import PrivateRoute from './PrivateMain';
-import AdminRoute from './AdminRoute';
-import Admin from './Admin';
 import Forgot from './Forgot';
 import Reset from './Reset';
+import Landing from './Landing';
 
 
-const Routes = () => {
+const Routes = (props) => {
     return(
         <BrowserRouter>
             <Switch>
-                <Route exact path='/' component={App}/>
-                <Route exact path='/signup' component={Signup}/>
+                <Route exact path='/' render={props => <Landing
+                {...props}/>}/>
                 <Route exact path='/auth/password/forgot' component={Forgot}/>
                 <Route exact path='/auth/password/reset/:token' component={Reset}/>
-                <Route exact path='/signin' component={Signin}/>
                 <Route exact path='/auth/activate/:token' component={Activate}/>
-                <PrivateRoute exact path='/private' component={Private}/>
-                <AdminRoute exact path='/admin' component={Admin}/>
+                <PrivateRoute exact path='/profile' component={Private}/>
             </Switch>
         </BrowserRouter>
     )

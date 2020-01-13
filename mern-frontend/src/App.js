@@ -1,12 +1,15 @@
-import React from 'react';
-import Layout from './containers/Layout'
+import React, {Component} from 'react';
+import Navbar from './containers/Navbar';
+import Main from './containers/Main';
+import {BrowserRouter as Router} from 'react-router-dom';
 
-const App = () => {
-  return (
-    <Layout>
-      <h1>Hello</h1>
-    </Layout>
-  )
+export default class App extends Component{
+  render(){
+    return (
+      <div>
+        <Navbar/>
+        <Main/>
+      </div>    
+    )
+  }
 }
-
-export default App;
